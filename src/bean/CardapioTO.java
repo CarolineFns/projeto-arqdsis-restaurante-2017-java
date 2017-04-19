@@ -7,7 +7,6 @@ public class CardapioTO {
 	private double preco;
 
 	public CardapioTO() {
-		this.id = id;
 		this.tipo = tipo;
 		this.disponibilidade = disponibilidade;
 		this.descricao = descricao;
@@ -15,6 +14,14 @@ public class CardapioTO {
 	}
 
 	public CardapioTO(int id, String tipo, String disponibilidade, String descricao, double preco) {
+		this.id = id;
+		this.tipo = tipo;
+		this.disponibilidade = disponibilidade;
+		this.descricao = descricao;
+		this.preco = preco;
+	}
+
+	public CardapioTO(String tipo, String disponibilidade, String descricao, double preco) {
 		this.id = id;
 		this.tipo = tipo;
 		this.disponibilidade = disponibilidade;

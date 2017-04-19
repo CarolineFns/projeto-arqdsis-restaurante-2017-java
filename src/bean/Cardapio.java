@@ -17,6 +17,10 @@ public class Cardapio {
 		this.preco = preco;
 	}
 
+	public Cardapio() {
+		
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -97,44 +101,11 @@ public class Cardapio {
 		preco = (double) dados.get(4);
 	}
 	
-	public CardapioTO carregarUm() {
+	public CardapioTO carregarUltimo() {
 		CardapioDAO dao = new CardapioDAO();
 		@SuppressWarnings("rawtypes")
-		CardapioTO dados = dao.carregarUm(id);
+		CardapioTO dados = dao.carregarUltimo();
 	return dados;
-	}
-
-	public void carregarPelaDescricao() {
-		CardapioDAO dao = new CardapioDAO();
-		@SuppressWarnings("rawtypes")
-		ArrayList dados = dao.carregarPelaDescricao(descricao);
-		id = (int) dados.get(0);
-		tipo = (String) dados.get(1);
-		disponibilidade = (String) dados.get(2);
-		descricao = (String) dados.get(3);
-		preco = (double) dados.get(4);
-	}
-
-	public void carregarPratosDisponiveis() {
-		CardapioDAO dao = new CardapioDAO();
-		@SuppressWarnings("rawtypes")
-		ArrayList dados = dao.carregarPratosDisponiveis(tipo);
-		id = (int) dados.get(0);
-		tipo = (String) dados.get(1);
-		disponibilidade = (String) dados.get(2);
-		descricao = (String) dados.get(3);
-		preco = (double) dados.get(4);
-	}
-
-	public void carregarBebidasDisponiveis() {
-		CardapioDAO dao = new CardapioDAO();
-		@SuppressWarnings("rawtypes")
-		ArrayList dados = dao.carregarPratosDisponiveis(tipo);
-		id = (int) dados.get(0);
-		tipo = (String) dados.get(1);
-		disponibilidade = (String) dados.get(2);
-		descricao = (String) dados.get(3);
-		preco = (double) dados.get(4);
 	}
 
 	@Override

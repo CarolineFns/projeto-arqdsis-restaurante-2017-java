@@ -26,8 +26,8 @@ public class CardapioService {
 		return to;
 	}
 
-	public CardapioTO carregarUm(int id) {
-		CardapioTO to = dao.carregarUm(id);
+	public CardapioTO carregarUltimo() {
+		CardapioTO to = dao.carregarUltimo();
 		return to;
 	}
 

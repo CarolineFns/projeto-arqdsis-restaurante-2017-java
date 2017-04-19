@@ -36,9 +36,8 @@ public class CrudCardapioServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request,response);
-		
-		
+		doPost(request, response);
+
 	}
 
 	/**
@@ -47,49 +46,25 @@ public class CrudCardapioServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
 		String tipo = request.getParameter("tipo");
 		String disponibilidade = request.getParameter("disponibilidade");
 		String descricao = request.getParameter("descricao");
 		double preco = Double.parseDouble(request.getParameter("preco"));
-		String oQueFazer = request.getParameter("oQueFazer");
 
-		Cardapio cardapio = new Cardapio(id, tipo, disponibilidade, descricao, preco);
-		CardapioTO to = new CardapioTO(id, tipo, disponibilidade, descricao, preco);
+		CardapioTO to = new CardapioTO( tipo, disponibilidade, descricao, preco);
+
 		CardapioService service = new CardapioService();
-		ArrayList<CardapioTO> toList = new ArrayList<>();
+		service.criar(to); 
 		
-		switch (oQueFazer) {
-		case "Cadastrar":
-			service.criar(to);
-			
-			to = service.carregarUm(to.getId());
-			
-			//enviar para o jsp
-			request.setAttribute("cardapio", to);
-			RequestDispatcher view =
-			request.getRequestDispatcher("cardapio.jsp");
-			view.forward(request, response);
-			
-			break;
-		case "Consultar":
-			to = service.carregarUm(to.getId());
-			
-				System.out.println("ID"+to.getId());
-				System.out.println("Tipo"+to.getTipo());
-				System.out.println("Descricao"+to.getDescricao());
-				System.out.println("Preco"+to.getPreco());
-				System.out.println("Disponibilidade"+to.getDisponibilidade());
-			break;
-		case "Remover":
-			service.excluir(to);
-			break;
-		case "Atualizar":
-			service.atualizar(to);
-			break;
-		}
-
-		PrintWriter out = response.getWriter();
-		out.println("Operação realizada com sucesso");
+	    //carrega o ultimo inserido
+		to = service.carregarUltimo();
+		
+		//envia para o JSP
+		request.setAttribute("cardapio", to); 
+		RequestDispatcher view =
+				request.getRequestDispatcher("cardapio.jsp");
+				view.forward(request, response);
+				
+		
 	}
 }
